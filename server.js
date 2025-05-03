@@ -12,6 +12,9 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api', diaryRoutes); 
 
+const foodSearchRoutes = require('./routes/foodSearchRoutes');
+app.use('/api', foodSearchRoutes);
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
