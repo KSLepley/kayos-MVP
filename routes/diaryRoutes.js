@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/authMiddleware');
+const diaryController = require('../controllers/diaryController');
 
-// Protected test route (only works if user is logged in)
-router.get('/diary', authenticate, (req, res) => {
-  const userId = req.user.id; // we got this from the token
-  res.json({ message: `Welcome! This is your diary, user ${userId}` });
-});
+router.post('/diary', authenticate, diaryController.addDiaryEntry);
+router.get('/diary', authenticate, diaryController.getDiaryByDate);
+router.get('/diary/summary', authenticate, diaryController.getDailySummary);
 
 module.exports = router;
